@@ -31,8 +31,18 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @PostMapping("/user/new")
+    @PostMapping("/user")
     public User create(@RequestBody User user) {
         return userService.join(user);
+    }
+
+    @DeleteMapping("/user")
+    public Long delete(@RequestParam Long id) {
+        return userService.removeUserById(id);
+    }
+
+    @PutMapping("/user")
+    public User update(@RequestBody User user) {
+        return userService.modifyUserById(user);
     }
 }

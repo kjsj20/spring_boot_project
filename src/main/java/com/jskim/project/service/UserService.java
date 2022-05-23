@@ -44,6 +44,15 @@ public class UserService {
                 });
     }
 
+    public Long removeUserById(Long id) {
+        userRepository.remove(id);
+        return id;
+    }
+
+    public User modifyUserById(User user) {
+        userRepository.modify(user);
+        return user;
+    }
     // 회원 가입 유효성 검사
     public void validateHandling(Errors errors) {
 //        Map<String, String> validatorResult = new HashMap<>();

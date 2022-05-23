@@ -48,6 +48,53 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
+    public Long remove(Long id) {
+        String sql = "delete from users where id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setLong(1, id);
+
+            pstmt.executeUpdate();
+
+            return id;
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt);
+        }
+    }
+
+    @Override
+    public User modify(User user) {
+        String sql = "update users set name = ? where id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, user.getName());
+            pstmt.setLong(2, user.getId());
+
+            pstmt.executeUpdate();
+
+            return user;
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt);
+        }
+    }
+
+    @Override
     public Optional<User> findById(Long id) {
         String sql = "select * from users where id = ?";
 
@@ -151,6 +198,23 @@ public class JdbcUserRepository implements UserRepository{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (conn != null) {
+                close(conn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void close(Connection conn, PreparedStatement pstmt) {
         try {
             if (pstmt != null) {
                 pstmt.close();
