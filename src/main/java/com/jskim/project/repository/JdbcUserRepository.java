@@ -4,7 +4,6 @@ import com.jskim.project.domain.User;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import javax.swing.text.html.Option;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

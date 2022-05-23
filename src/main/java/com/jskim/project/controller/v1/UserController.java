@@ -3,10 +3,8 @@ package com.jskim.project.controller.v1;
 import com.jskim.project.domain.User;
 import com.jskim.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

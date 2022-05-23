@@ -1,21 +1,12 @@
 package com.jskim.project.service;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.io.JsonEOFException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jskim.project.domain.User;
 import com.jskim.project.repository.UserRepository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 
-import javax.swing.text.html.Option;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-@Transactional
 public class UserService {
     private final UserRepository userRepository;
 

@@ -1,6 +1,5 @@
 package com.jskim.project.controller;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
