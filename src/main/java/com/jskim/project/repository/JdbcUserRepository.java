@@ -17,7 +17,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User save(User user) {
-        String sql = "insert into users(name) values(?)";
+        String sql = "insert into users(email, password, name, phone_num, birth_date, address, address_detail, role, description, insert_timestamp, update_timestamp) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -27,7 +27,17 @@ public class JdbcUserRepository implements UserRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            pstmt.setString(1, user.getName());
+            pstmt.setString(1, user.getEmail());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getName());
+            pstmt.setString(4, user.getPhone_num());
+            pstmt.setString(5, user.getBirth_date());
+            pstmt.setString(6, user.getAddress());
+            pstmt.setString(7, user.getAddress_detail());
+            pstmt.setString(8, user.getRole());
+            pstmt.setString(9, user.getDescription());
+            pstmt.setString(10, user.getInsert_timestamp());
+            pstmt.setString(11, user.getUpdate_timestamp());
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
