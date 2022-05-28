@@ -1,6 +1,6 @@
 package com.jskim.project.controller.v1;
 
-import com.jskim.project.domain.User;
+import com.jskim.project.domain.Users;
 import com.jskim.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +19,19 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> list() {
-        List<User> users = userService.findUsers();
+    public List<Users> list() {
+        List<Users> users = userService.findUsers();
         return users;
     }
 
     @GetMapping("/user")
-    public Optional<User> findUserById(@RequestParam Long id) {
+    public Optional<Users> findUserById(@RequestParam Long id) {
         return userService.findUserById(id);
     }
 
     @PostMapping("/user")
-    public User create(@RequestBody User user) {
-        return userService.join(user);
+    public Users create(@RequestBody Users users) {
+        return userService.join(users);
     }
 
     @DeleteMapping("/user")
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    public User update(@RequestBody User user) {
-        return userService.modifyUserById(user);
+    public Users update(@RequestBody Users users) {
+        return userService.modifyUserById(users);
     }
 }

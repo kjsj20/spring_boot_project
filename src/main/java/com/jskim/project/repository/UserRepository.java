@@ -1,15 +1,15 @@
 package com.jskim.project.repository;
 
-import com.jskim.project.domain.User;
+import com.jskim.project.domain.Users;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
-    User save(User user);
+    Users save(Users users);
     Long remove(Long id);
-    User modify(User user);
-    Optional<User> findById(Long id);
-    Optional<User> findByName(String name);
-    List<User> findAll();
+    Users modify(Users users);
+    Optional<Users> findById(Long id);
+    Optional<Users> findByName(String name);
+    List<Users> findAll();
 }

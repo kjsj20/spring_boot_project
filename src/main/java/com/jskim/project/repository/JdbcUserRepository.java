@@ -1,6 +1,6 @@
 package com.jskim.project.repository;
 
-import com.jskim.project.domain.User;
+import com.jskim.project.domain.Users;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -16,7 +16,7 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public User save(User user) {
+    public Users save(Users users) {
         String sql = "insert into users(email, password, name, phone_num, birth_date, address, address_detail, role, description, insert_timestamp, update_timestamp) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection conn = null;
@@ -27,28 +27,28 @@ public class JdbcUserRepository implements UserRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            pstmt.setString(1, user.getEmail());
-            pstmt.setString(2, user.getPassword());
-            pstmt.setString(3, user.getName());
-            pstmt.setString(4, user.getPhone_num());
-            pstmt.setString(5, user.getBirth_date());
-            pstmt.setString(6, user.getAddress());
-            pstmt.setString(7, user.getAddress_detail());
-            pstmt.setString(8, user.getRole());
-            pstmt.setString(9, user.getDescription());
-            pstmt.setString(10, user.getInsert_timestamp());
-            pstmt.setString(11, user.getUpdate_timestamp());
+            pstmt.setString(1, users.getEmail());
+            pstmt.setString(2, users.getPassword());
+            pstmt.setString(3, users.getName());
+            pstmt.setString(4, users.getPhone_num());
+            pstmt.setString(5, users.getBirth_date());
+            pstmt.setString(6, users.getAddress());
+            pstmt.setString(7, users.getAddress_detail());
+            pstmt.setString(8, users.getRole());
+            pstmt.setString(9, users.getDescription());
+            pstmt.setString(10, users.getInsert_timestamp());
+            pstmt.setString(11, users.getUpdate_timestamp());
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
 
             if (rs.next()) {
-                user.setId(rs.getLong(1));;
+                users.setId(rs.getLong(1));;
             } else {
                 throw new SQLException("id 조회 실패");
             }
 
-            return user;
+            return users;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
@@ -80,7 +80,7 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public User modify(User user) {
+    public Users modify(Users users) {
         String sql = "update users set name = ? where id = ?";
 
         Connection conn = null;
@@ -90,12 +90,12 @@ public class JdbcUserRepository implements UserRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, user.getName());
-            pstmt.setLong(2, user.getId());
+            pstmt.setString(1, users.getName());
+            pstmt.setLong(2, users.getId());
 
             pstmt.executeUpdate();
 
-            return user;
+            return users;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
@@ -104,7 +104,7 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<Users> findById(Long id) {
         String sql = "select * from users where id = ?";
 
         Connection conn = null;
@@ -120,10 +120,10 @@ public class JdbcUserRepository implements UserRepository{
             rs = pstmt.executeQuery();
 
             if(rs.next()) {
-                User user = new User();
-                user.setId(rs.getLong("id"));
-                user.setName(rs.getString("name"));
-                return Optional.of(user);
+                Users users = new Users();
+                users.setId(rs.getLong("id"));
+                users.setName(rs.getString("name"));
+                return Optional.of(users);
             }
 
             return Optional.empty();
@@ -136,7 +136,7 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public Optional<User> findByName(String name) {
+    public Optional<Users> findByName(String name) {
         String sql = "select * from users where name = ?";
 
         Connection conn = null;
@@ -151,10 +151,10 @@ public class JdbcUserRepository implements UserRepository{
             rs = pstmt.executeQuery();
 
             if(rs.next()) {
-                User user = new User();
-                user.setId(rs.getLong("id"));
-                user.setName(rs.getString("name"));
-                return Optional.of(user);
+                Users users = new Users();
+                users.setId(rs.getLong("id"));
+                users.setName(rs.getString("name"));
+                return Optional.of(users);
             }
 
             return Optional.empty();
@@ -166,7 +166,7 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public List<User> findAll() {
+    public List<Users> findAll() {
         String sql = "select * from users";
 
         Connection conn = null;
@@ -178,10 +178,10 @@ public class JdbcUserRepository implements UserRepository{
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
-            List<User> users = new ArrayList<>();
+            List<Users> users = new ArrayList<>();
 
             while(rs.next()) {
-                User user = new User();
+                Users user = new Users();
                 user.setId(rs.getLong("id"));
                 user.setName(rs.getString("name"));
                 users.add(user);
