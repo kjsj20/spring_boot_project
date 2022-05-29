@@ -25,27 +25,27 @@ public class UserService {
     }
 
     public Users join(Users users) {
-        validateDuplicateUser(users);
+//        validateDuplicateUser(users);
         userRepository.save(users);
         return users;
     }
 
-    private void validateDuplicateUser(Users users) {
-        userRepository.findByName(users.getName())
-                .ifPresent(u -> {
-                    throw new IllegalStateException("you are already a user");
-                });
-    }
+//    private void validateDuplicateUser(Users users) {
+//        userRepository.findOne(users)
+//                .ifPresent(u -> {
+//                    throw new IllegalStateException("you are already a user");
+//                });
+//    }
 
     public Long removeUserById(Long id) {
-        userRepository.remove(id);
+        userRepository.deleteById(id);
         return id;
     }
 
-    public Users modifyUserById(Users users) {
-        userRepository.modify(users);
-        return users;
-    }
+//    public Users modifyUserById(Users users) {
+//        userRepository.update(users);
+//        return users;
+//    }
     // 회원 가입 유효성 검사
     public void validateHandling(Errors errors) {
 //        Map<String, String> validatorResult = new HashMap<>();

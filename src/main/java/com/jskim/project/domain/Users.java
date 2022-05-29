@@ -1,34 +1,35 @@
 package com.jskim.project.domain;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Users {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @Column(nullable = true, length = 20)
     private String email;
-    @NonNull
+    @Column(nullable = true, length = 20)
     private String password;
-    @NonNull
+    @Column(nullable = true, length = 20)
     private String name;
-    @NonNull
+    @Column(nullable = true, length = 20)
     private String phone_num;
+    @Column(nullable = false, length = 20)
     private String birth_date;
+    @Column(nullable = false, length = 45)
     private String address;
+    @Column(nullable = false, length = 45)
     private String address_detail;
+    @Column(nullable = false, length = 10)
     private String role;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false, length = 20)
     private String insert_timestamp;
+    @Column(nullable = false, length = 20)
     private String update_timestamp;
 }

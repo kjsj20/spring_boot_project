@@ -1,6 +1,5 @@
 package com.jskim.project;
 
-import com.jskim.project.repository.JdbcUserRepository;
 import com.jskim.project.repository.UserRepository;
 import com.jskim.project.service.UserService;
 import org.springframework.context.annotation.Bean;
